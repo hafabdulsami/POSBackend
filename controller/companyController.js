@@ -16,7 +16,7 @@ const addCompany = async (req, res) => {
       phoneNumber,
     });
 
-    await newSupplier.save();
+    await newCompany.save();
     return res.status(200).json({ message: "Company is Created" });
   } catch (err) {
     console.error(err);
