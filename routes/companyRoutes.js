@@ -4,7 +4,7 @@ const { checkAuthority } = require("../utils/checkAuthority");
 const companyController = require("../controller/companyController");
 
 router.post("/addCompany", checkAuthority, companyController.addCompany);
-router.get("/companyList",checkAuthority,companyController.supplierList);
-//router.put("/editSupplier",checkAuthority,supplierController.editSupplier);
+router.get("/companyList",checkAuthority,companyController.companyList);
+router.put("/editCompany",checkAuthority,companyController.editCompany);
 
 module.exports = router;

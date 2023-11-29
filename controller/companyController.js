@@ -1,4 +1,5 @@
 const Company = require("../model/company");
+const { ObjectId } = require("mongodb");
 
 const addCompany = async (req, res) => {
   const { name, phoneNumber } = req.body;
@@ -24,7 +25,7 @@ const addCompany = async (req, res) => {
   }
 };
 
-const supplierList = async (req, res) => {
+const companyList = async (req, res) => {
   try {
     const { _id } = req.query;
     console.log(req.query);
@@ -43,7 +44,29 @@ const supplierList = async (req, res) => {
   }
 };
 
+const editCompany = async (req, res) => {
+  const { _id, name, phoneNumber } = req.body;
+  const company = await Company.findById({ _id: new ObjectId(_id) });
+  if (company) {
+    await Company.findOneAndUpdate(
+      {
+        _id: new ObjectId(_id),
+      },
+      {
+        $set: {
+          name,
+          phoneNumber
+        },
+      }
+    );
+    return res.status(200).json({ message: "Company is updated" });
+  } else {
+    return res.status(400).json({ message: "Company not found!" });
+  }
+};
+
 module.exports = {
   addCompany,
-  supplierList
+  companyList,
+  editCompany
 };
