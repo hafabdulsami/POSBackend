@@ -24,6 +24,26 @@ const addCompany = async (req, res) => {
   }
 };
 
+const supplierList = async (req, res) => {
+  try {
+    const { _id } = req.query;
+    console.log(req.query);
+    if (_id) {
+      const company = await Company.findById({ _id: _id });
+      return res.status(200).json({ company });
+    } else {
+      const companyList = await Company.find({});
+      return res.status(200).json({ companyList });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      errors: [{ message: "Something went wrong. Please try again." }],
+    });
+  }
+};
+
 module.exports = {
   addCompany,
+  supplierList
 };

@@ -28,7 +28,6 @@ const addSupplier = async (req, res) => {
 };
 
 const supplierList = async (req, res) => {
-  console.log("kkk");
   try {
     const { _id } = req.query;
     console.log(req.query);
