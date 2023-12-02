@@ -35,8 +35,13 @@ const ProductList = async (req, res) => {
       const product = await Product.findById({ _id: _id });
       return res.status(200).json({ product });
     } else {
-      const productList = await Product.find({});
-      return res.status(200).json({ productList });
+      const productList = await Product.find({}).populate('companyId');
+      const modifiedProductList = productList.map(product => ({
+        // Modify other fields as needed
+        ...product.toObject(),
+        companyId: product.companyId.name // Replace 'name' with the actual field in the Company model
+      }));
+      return res.status(200).json({ productList:modifiedProductList });
     }
   } catch (err) {
     console.log(err);
