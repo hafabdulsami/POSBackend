@@ -5,8 +5,6 @@ const { ObjectId } = require("mongodb");
 
 const login = async (req, res) => {
   const { username, password } = req.query;
-  console.log(req.query);
-  console.log(username);
   if (!username || !password) {
     return res
       .status(422)

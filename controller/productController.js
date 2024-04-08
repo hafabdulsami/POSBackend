@@ -18,7 +18,7 @@ const addProduct = async (req, res) => {
       stockalert,
       companyId,
     });
-
+  
     await newProduct.save();
     return res.status(200).json({ message: "Product is Created" });
   } catch (err) {
